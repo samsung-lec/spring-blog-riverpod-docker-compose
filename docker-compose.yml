@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  mysql:
+    build:
+      context: ./mysql
+    restart: always
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+
+  redis:
+    build:
+      context: ./redis
+    restart: always
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+
+  spring:
+    build: 
+      context: ./spring
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      DATASOURCE_URL: mysql
+      REDIS_URL: redis
+    depends_on:
+      - mysql
+      - redis
+
+  html-websocket:
+    build: 
+      context: ./nginx
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      SERVER_URL: spring
+    depends_on:
+      - spring
