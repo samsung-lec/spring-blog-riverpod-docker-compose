@@ -7,7 +7,7 @@ services:
     restart: always
     container_name: mysql-container
     ports:
-      - "3306:3306"
+      - "33060:3306"
 
   redis:
     build:
@@ -18,20 +18,21 @@ services:
       - "6379:6379"
 
   spring:
-    build: 
+    build:
       context: ./spring
     restart: always
     ports:
       - 8080:8080
     environment:
       DATASOURCE_URL: mysql
+      DATASOURCE_PORT: 33060
       REDIS_URL: redis
     depends_on:
       - mysql
       - redis
 
   html-websocket:
-    build: 
+    build:
       context: ./nginx
     restart: always
     ports:
