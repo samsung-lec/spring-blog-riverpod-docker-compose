@@ -1,4 +1,4 @@
-git clone https://github.com/codingspecialist/spring-blog-riverpod.git
+git clone https://github.com/samsung-lec/spring-blog-riverpod.git
 cd spring-blog-riverpod
 chmod +x ./gradlew
 ./gradlew clean build -x test
