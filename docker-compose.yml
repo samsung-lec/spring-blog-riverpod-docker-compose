@@ -7,7 +7,7 @@ services:
     restart: always
     container_name: mysql-container
     ports:
-      - "33060:3306"
+      - "3306:3306"
 
   redis:
     build:
